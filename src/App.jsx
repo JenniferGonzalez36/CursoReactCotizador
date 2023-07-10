@@ -1,8 +1,8 @@
+import AppSeguro from "./components/AppSeguro";
+
 function App() {
   return (
-    <>
-      <h1>Cotizador</h1>
-    </>
+    <AppSeguro />
   )
 }
 
