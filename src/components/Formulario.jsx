@@ -1,13 +1,37 @@
 import React, { Fragment } from 'react'
 import { MARCAS, YEARS, PLANES } from '../constants';
+import useCotizador from '../hooks/useCotizador';
+import Error from './Error';
 
 const Formulario = () => {
+
+    const { datos, handleChangeDatos, error, setError } = useCotizador();
+
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        if(Object.values(datos).includes('')){
+            setError('Todos los campos son obligatorios');
+            return;
+        }
+
+        setError('');
+    }
+
   return (
     <>
-        <form>
+        {error && <Error />}
+        <form
+            onSubmit={handleSubmit}
+        >
             <div className="my-5">
                 <label className='block mb-3 font-bold text-gray-400 uppercase' htmlFor='marca'>Marca</label>
-                <select name="marca" id="marca" className='w-full p-3 bg-white border border-gray-200'>
+                <select 
+                    name="marca" 
+                    className='w-full p-3 bg-white border border-gray-200'
+                    onChange={ e => handleChangeDatos(e)}
+                    value={datos.marca}
+                >
                     <option value="">-- Selecciona Marca --</option>
                     {
                         MARCAS.map(marca => (
@@ -22,8 +46,13 @@ const Formulario = () => {
                 </select>
             </div>
             <div className="my-5">
-                <label className='block mb-3 font-bold text-gray-400 uppercase' htmlFor='anio'>Año</label>
-                <select name="anio" id="anio" className='w-full p-3 bg-white border border-gray-200'>
+                <label className='block mb-3 font-bold text-gray-400 uppercase' htmlFor='year'>Año</label>
+                <select 
+                    name="year" 
+                    className='w-full p-3 bg-white border border-gray-200'
+                    onChange={ e => handleChangeDatos(e)}
+                    value={datos.year}
+                >
                     <option value="">-- Selecciona Año --</option>
                     {
                         YEARS.map(year => (
@@ -49,7 +78,8 @@ const Formulario = () => {
                                 type='radio'
                                 name='plan'
                                 value={plan.id}
-                            ></input>
+                                onChange={ e => handleChangeDatos(e)}
+                            />
                         </Fragment>
                     ))}
                 </div>
