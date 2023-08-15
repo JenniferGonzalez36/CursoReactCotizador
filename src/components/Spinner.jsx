@@ -3,13 +3,9 @@ import "../styles/Spinner.css";
 
 const Spinner = () => {
   return (
-    <div className="sk-chase">
-        <div className="sk-chase-dot"></div>
-        <div className="sk-chase-dot"></div>
-        <div className="sk-chase-dot"></div>
-        <div className="sk-chase-dot"></div>
-        <div className="sk-chase-dot"></div>
-        <div className="sk-chase-dot"></div>
+    <div className="spinner">
+        <div className="dot1"></div>
+        <div className="dot2"></div>
     </div>
   )
 }
